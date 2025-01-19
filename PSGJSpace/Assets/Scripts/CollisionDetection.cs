@@ -14,6 +14,7 @@ public class CollisionDetection : MonoBehaviour
             GameObject other = collision.gameObject;
             if (other.layer == 6) //player
             {
+                other.GetComponent<PlayerMovement>().healthAmount -= 12f;
                 GameManager.Instance.DestroyEnemy(transform.gameObject);
             }
         }

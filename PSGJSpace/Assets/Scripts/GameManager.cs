@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance { get; private set; }
+
+   
     void Awake()
     {
         if (Instance == null)
@@ -18,6 +21,13 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject); // Ensure only one instance exists
         }
     }
+
+
+
+    //UI
+    public GameObject boost;
+    public GameObject health;
+
     public GameObject player;
     public Camera mainCamera;
 
@@ -29,12 +39,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         numEnemies = 0;
+        boost.GetComponent<Slider>().value = 1;
+        health.GetComponent<Slider>().value = 1;    
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        boost.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().boostAmount / player.GetComponent<PlayerMovement>().maxBoost;
+        health.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().healthAmount / player.GetComponent<PlayerMovement>().maxHealth;
         if (numEnemies < 20)
         {
             SpawnEnemies();
