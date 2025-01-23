@@ -12,10 +12,26 @@ public class CollisionDetection : MonoBehaviour
         if (collision != null)
         {
             GameObject other = collision.gameObject;
-            if (other.layer == 6) //player
+            if (other.layer == 8) //player
             {
-                other.GetComponent<PlayerMovement>().healthAmount -= 12f;
-                GameManager.Instance.DestroyEnemy(transform.gameObject);
+                if (gameObject.layer == 9)
+                {
+                    if (GameManager.Instance.boostn)
+                    {
+                        other.GetComponent<PlayerMovement>().healthAmount -= 9f;
+                    }
+                    else
+                    {
+                        other.GetComponent<PlayerMovement>().healthAmount -= 18f;
+                    }
+                    GameManager.Instance.DestroyEnemy(transform.gameObject);
+                }
+                else if (gameObject.layer == 10)
+                {
+                    other.GetComponent<PlayerMovement>().healthAmount += 6f;
+                    Destroy(gameObject);
+                }
+
             }
         }
     }
