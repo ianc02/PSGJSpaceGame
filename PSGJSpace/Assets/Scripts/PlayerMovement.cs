@@ -1,6 +1,9 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public float initBoost;
 
     private float lastTimeBoost;
+    //Sound
+    private EventInstance boostSFX;
+    private float boostSFXValue;
 
     private Vector3 velocity;
     // Start is called before the first frame update
@@ -22,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     {
         velocity = new Vector3();
         lastTimeBoost = Time.time;
+        boostSFX = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Boost);
+        boostSFXValue = 1f;
     }
 
     // Update is called once per frame
@@ -39,8 +47,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Time.time - lastTimeBoost > 0.75)
             {
+                
+                boostSFXValue = 1f;
+                boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
                 velocity *= initBoost;
                 lastTimeBoost = Time.time;
+                boostSFX.start();
             }
             
         }
@@ -55,16 +67,28 @@ public class PlayerMovement : MonoBehaviour
                 */
                 velocity *=boostAddition;
                 boostAmount -= 5;
+                GameManager.Instance.addToScore(0.01f);
             }
         }
+        
         else
         {
             boostAmount += 1;
             boostAmount = Mathf.Min(boostAmount, maxBoost);
         }
+        if (Input.GetKeyUp(KeyCode.LeftShift) || boostAmount <=5)
+        {
+            while (boostSFXValue > 0.01)
+            {
+                boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
+                boostSFXValue -= 0.12f;
+            }
 
 
-        healthAmount = Mathf.Min(healthAmount +regenRate, maxHealth);
+        }
+
+
+        healthAmount = Mathf.Min(healthAmount -regenRate, maxHealth);
         
         transform.position += velocity * Time.deltaTime;
 

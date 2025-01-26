@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{32a04282-50d5-4163-b8e6-bbca34fea483}">
+		<property name="name">
+			<value>Boost_Fade</value>
+		</property>
+		<relationship name="folder">
+			<destination>{c4289f0d-02f4-4a89-8f9f-e750b8e939aa}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{14a45e79-8c68-4702-bfa5-4ad86f09ee05}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{14a45e79-8c68-4702-bfa5-4ad86f09ee05}">
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>

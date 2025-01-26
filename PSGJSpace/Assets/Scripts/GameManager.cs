@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
+using FMOD.Studio;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,10 +37,17 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera;
     public Camera miniMapCam;
 
+    public float score;
+    public TextMeshProUGUI scoreValue;
+
 
     public GameObject BasicEnemy;
     public GameObject ShipBit;
+    public GameObject Shooter;
     private int numEnemies;
+
+
+    
 
     private Vector3 originPlayerPos;
     // Start is called before the first frame update
@@ -47,6 +57,7 @@ public class GameManager : MonoBehaviour
         boost.GetComponent<Slider>().value = 1;
         health.GetComponent<Slider>().value = 1;    
         originPlayerPos = player.transform.position;
+        
     }
 
     // Update is called once per frame
@@ -67,6 +78,7 @@ public class GameManager : MonoBehaviour
             player.transform.position = new Vector3(-player.transform.position.x, -player.transform.position.y);
         }
         boostn = Input.GetKey(KeyCode.LeftShift);
+        scoreValue.text = Mathf.Round(score).ToString();
     }
 
     void SpawnEnemies()
@@ -75,7 +87,15 @@ public class GameManager : MonoBehaviour
         Quaternion q = Quaternion.Euler(player.transform.position.z - p.z,0f,0f);
         if (Vector3.Distance(player.transform.position, p) > 20f)
         {
-            Instantiate(BasicEnemy, p, q);
+            int r = Random.Range(0, 100);
+            if (r < 20)
+            {
+                Instantiate(Shooter, p, q);
+            }
+            else
+            {
+                Instantiate(BasicEnemy, p, q);
+            }
             numEnemies++;
         }
         
@@ -94,5 +114,9 @@ public class GameManager : MonoBehaviour
             Instantiate(ShipBit, randpos, q);
         }
         numEnemies--;
+    }
+    public void addToScore(float value)
+    {
+        score += value;
     }
 }

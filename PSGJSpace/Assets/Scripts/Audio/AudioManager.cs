@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     private List<EventInstance> eventInstances;
     private EventInstance musicEventInstance;
+    private EventInstance boost;
     private void Awake()
     {
         if (instance != null)
@@ -30,6 +31,7 @@ public class AudioManager : MonoBehaviour
     {
         musicEventInstance = CreateEventInstance(musicEventReference);
         musicEventInstance.start();
+        boost = CreateEventInstance(FMODEvents.instance.Boost);
     }
     public void PlayOneShot(EventReference sound, Vector3 position)
     {
@@ -40,6 +42,11 @@ public class AudioManager : MonoBehaviour
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
         return eventInstance;
+    }
+
+    private void setGainParameter (string parameterName, float value)
+    {
+        boost.setParameterByName(parameterName, value);
     }
 
 }

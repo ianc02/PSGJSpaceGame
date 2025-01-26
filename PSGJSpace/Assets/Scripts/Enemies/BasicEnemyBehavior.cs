@@ -18,6 +18,15 @@ public class BasicEnemyBehavior : MonoBehaviour
     {
         Vector3 direction = (player.transform.position - transform.position).normalized;
 
-        transform.position += direction * speed * Time.deltaTime;    
+        transform.position += direction * speed * Time.deltaTime;
+        
+
+        //We use aTan2 since it handles negative numbers and division by zero errors. 
+        float angle = Mathf.Atan2(direction.y, direction.x);
+
+        //Now we set our new rotation. 
+        transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg) +90);
+
+
     }
 }
