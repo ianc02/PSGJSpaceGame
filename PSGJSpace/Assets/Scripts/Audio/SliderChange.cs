@@ -1,23 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.UI;
+using UnityEngine.UI;
 
 public class SliderChange : MonoBehaviour
 {
+
+    public string path;
     // Start is called before the first frame update
-    public void SliderValChange(string path, float value)
+    public void SliderValChange()
     {
-        if (path == "")
+        if (path == "master")
         {
-            AudioManager.instance.masterVolume= ((float)value);
+            AudioManager.instance.masterVolume= gameObject.GetComponent<Slider>().value;
         }
-        else if (path == "music")
+        else if (path == "musc")
         {
-            AudioManager.instance.musicVolume = ((float)value);
+            AudioManager.instance.musicVolume = gameObject.GetComponent<Slider>().value;
         }
-        if (path == "sfx")
+        else if (path == "sfx")
         {
-            AudioManager.instance.SFXVolume = ((float)value);
+            AudioManager.instance.SFXVolume = gameObject.GetComponent<Slider>().value;
+        }
+        else
+        {
+            Debug.Log(path);
         }
     }
 

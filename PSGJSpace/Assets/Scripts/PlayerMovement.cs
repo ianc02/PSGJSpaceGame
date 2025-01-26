@@ -37,80 +37,82 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        float rotationInput = Input.GetAxis("Horizontal"); // "A" or "D" keys
-        transform.Rotate(Vector3.forward * -rotationInput * rotationSpeed * Time.deltaTime);
-        
-        float totalAngle = 0f;
-        if (Input.GetKey(KeyCode.A))
+        if (GameManager.Instance.running)
         {
-            totalAngle += partSystemAngleChange;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            totalAngle -= partSystemAngleChange;
-        }
-        Quaternion psAngle = Quaternion.Euler(totalAngle,  -90, partSystemGO.transform.rotation.z );
-        partSystemGO.transform.localRotation = psAngle;
+            float rotationInput = Input.GetAxis("Horizontal"); // "A" or "D" keys
+            transform.Rotate(Vector3.forward * -rotationInput * rotationSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            velocity += transform.up * speed * Time.deltaTime;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift)) 
-        {
-            if (Time.time - lastTimeBoost > 0.75)
+            float totalAngle = 0f;
+            if (Input.GetKey(KeyCode.A))
             {
-                
-                boostSFXValue = 1f;
-                boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
-                velocity *= initBoost;
-                lastTimeBoost = Time.time;
-                boostSFX.start();
-                //partSystemGO.GetComponent<ParticleSystem>().Play();
+                totalAngle += partSystemAngleChange;
             }
-            
-        }
-        partSystemGO.GetComponent<ParticleSystem>().Play();
-        if (Input.GetKey(KeyCode.LeftShift)) 
-        {
-            if (boostAmount > 0)
+            if (Input.GetKey(KeyCode.D))
             {
-                /*if (velocity.magnitude < 0.05)
+                totalAngle -= partSystemAngleChange;
+            }
+            Quaternion psAngle = Quaternion.Euler(totalAngle, -90, partSystemGO.transform.rotation.z);
+            partSystemGO.transform.localRotation = psAngle;
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                velocity += transform.up * speed * Time.deltaTime;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                if (Time.time - lastTimeBoost > 0.75)
                 {
-                    velocity += transform.up * speed * Time.deltaTime * initBoost;
+
+                    boostSFXValue = 1f;
+                    boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
+                    velocity *= initBoost;
+                    lastTimeBoost = Time.time;
+                    boostSFX.start();
+                    //partSystemGO.GetComponent<ParticleSystem>().Play();
                 }
-                */
-                velocity *=boostAddition;
-                boostAmount -= 5;
-                GameManager.Instance.addToScore(0.01f);
+
             }
-        }
-        
-        else
-        {
-            boostAmount += 1;
-            boostAmount = Mathf.Min(boostAmount, maxBoost);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift) || boostAmount <=5)
-        {
-            while (boostSFXValue > 0.01)
+            partSystemGO.GetComponent<ParticleSystem>().Play();
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
-                boostSFXValue -= 0.12f;
-                partSystemGO.GetComponent<ParticleSystem>().Stop();
+                if (boostAmount > 0)
+                {
+                    /*if (velocity.magnitude < 0.05)
+                    {
+                        velocity += transform.up * speed * Time.deltaTime * initBoost;
+                    }
+                    */
+                    velocity *= boostAddition;
+                    boostAmount -= 5;
+                    GameManager.Instance.addToScore(0.01f);
+                }
+            }
+
+            else
+            {
+                boostAmount += 1;
+                boostAmount = Mathf.Min(boostAmount, maxBoost);
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift) || boostAmount <= 5)
+            {
+                while (boostSFXValue > 0.01)
+                {
+                    boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
+                    boostSFXValue -= 0.12f;
+                    partSystemGO.GetComponent<ParticleSystem>().Stop();
+                }
+
+
             }
 
 
+            healthAmount = Mathf.Min(healthAmount - regenRate, maxHealth);
+
+            transform.position += velocity * Time.deltaTime;
+
+            velocity *= .993f;
+            //Debug.Log(velocity);
         }
-
-
-        healthAmount = Mathf.Min(healthAmount -regenRate, maxHealth);
-        
-        transform.position += velocity * Time.deltaTime;
-
-        velocity *= .993f;
-        //Debug.Log(velocity);
 
     }
 }

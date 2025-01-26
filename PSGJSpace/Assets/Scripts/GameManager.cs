@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     public GameObject Shooter;
     private int numEnemies;
 
+    public bool running;
+
 
     
 
@@ -57,28 +59,41 @@ public class GameManager : MonoBehaviour
         boost.GetComponent<Slider>().value = 1;
         health.GetComponent<Slider>().value = 1;    
         originPlayerPos = player.transform.position;
+        running = false;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        boost.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().boostAmount / player.GetComponent<PlayerMovement>().maxBoost;
-        health.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().healthAmount / player.GetComponent<PlayerMovement>().maxHealth;
-        if (numEnemies < 30)
+        if (running)
         {
-            SpawnEnemies();
-        }
+            boost.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().boostAmount / player.GetComponent<PlayerMovement>().maxBoost;
+            health.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().healthAmount / player.GetComponent<PlayerMovement>().maxHealth;
+            if (numEnemies < 30)
+            {
+                SpawnEnemies();
+            }
 
-        mainCamera.transform.rotation = Quaternion.identity;
-        miniMapCam.transform.rotation = Quaternion.identity;
+            mainCamera.transform.rotation = Quaternion.identity;
+            miniMapCam.transform.rotation = Quaternion.identity;
 
-        if (Vector3.Distance(originPlayerPos, player.transform.position) > 210)
-        {
-            player.transform.position = new Vector3(-player.transform.position.x, -player.transform.position.y);
+            if (Vector3.Distance(originPlayerPos, player.transform.position) > 210)
+            {
+                player.transform.position = new Vector3(-player.transform.position.x, -player.transform.position.y);
+            }
+            boostn = Input.GetKey(KeyCode.LeftShift);
+            scoreValue.text = Mathf.Round(score).ToString();
         }
-        boostn = Input.GetKey(KeyCode.LeftShift);
-        scoreValue.text = Mathf.Round(score).ToString();
+    }
+
+    public void PauseTheGame()
+    {
+        running = false;
+    }
+    public void UnpauseTheGame()
+    {
+        running = true;
     }
 
     void SpawnEnemies()

@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeMusic(FMODEvents.instance.music);
+        
     }
 
     private void Update()
@@ -70,20 +70,5 @@ public class AudioManager : MonoBehaviour
         boost.setParameterByName(parameterName, value);
     }
 
-    public void SliderChange(string path, float value)
-    {
-        if (path == "")
-        {
-            masterBus.setVolume((float)value);
-        }
-        else if (path == "music")
-        {
-            musicBus.setVolume((float)value);
-        }
-        if (path == "sfx")
-        {
-            SFXBus.setVolume((float)value);
-        }
-    }
-
+    
 }
