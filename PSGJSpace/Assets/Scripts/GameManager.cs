@@ -40,6 +40,13 @@ public class GameManager : MonoBehaviour
     public float score;
     public TextMeshProUGUI scoreValue;
 
+    public GameObject MainMenu;
+    public GameObject InGameOverlay;
+
+    public GameObject SettingsScreen;
+    public GameObject SettingsScreenMainMenuButton;
+    public GameObject SettingsScreenXButton;
+
 
     public GameObject BasicEnemy;
     public GameObject ShipBit;
@@ -66,6 +73,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (running)
+            {
+                running = false;
+                PauseTheGame();
+            }
+            else
+            {
+                running = true;
+                UnpauseTheGame();
+            }
+
+        }
         if (running)
         {
             boost.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().boostAmount / player.GetComponent<PlayerMovement>().maxBoost;
@@ -90,10 +111,27 @@ public class GameManager : MonoBehaviour
     public void PauseTheGame()
     {
         running = false;
+        SettingsScreen.SetActive(true);
+        SettingsScreenMainMenuButton.SetActive(true);
+        SettingsScreenXButton.SetActive(false);
+        
+    }
+    public void BackToMainMenu()
+    {
+        SettingsScreenMainMenuButton.SetActive(false);
+        SettingsScreen.SetActive(false);
+        MainMenu.SetActive(true);
+        SettingsScreenXButton.SetActive(true);
+        InGameOverlay.SetActive(false);
+
     }
     public void UnpauseTheGame()
     {
+        AudioManager.instance.InitializeMusic(FMODEvents.instance.music);
         running = true;
+        MainMenu.SetActive(false);
+        SettingsScreen.SetActive(false);
+        InGameOverlay.SetActive(true);
     }
 
     void SpawnEnemies()

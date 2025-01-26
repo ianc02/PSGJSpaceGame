@@ -22,28 +22,31 @@ public class MissleBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!fired)
+        if (GameManager.Instance.running)
         {
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            //We use aTan2 since it handles negative numbers and division by zero errors. 
-            float angle = Mathf.Atan2(direction.y, direction.x);
+            if (!fired)
+            {
+                Vector3 direction = (player.transform.position - transform.position).normalized;
+                //We use aTan2 since it handles negative numbers and division by zero errors. 
+                float angle = Mathf.Atan2(direction.y, direction.x);
 
-            //Now we set our new rotation. 
-            transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg) );
-            fired = true;
-            constDirection = direction;
-        }
+                //Now we set our new rotation. 
+                transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg));
+                fired = true;
+                constDirection = direction;
+            }
 
             transform.position += constDirection * speed * Time.deltaTime;
 
 
-            
-        
-        
 
-        if (Time.time - startTime > time2Die)
-        {
-            Destroy(gameObject);
+
+
+            // implement better system lik coroutines so cant glitch missles by pausing and waiting out
+            if (Time.time - startTime > time2Die)
+            {
+                Destroy(gameObject);
+            }
         }
 
 

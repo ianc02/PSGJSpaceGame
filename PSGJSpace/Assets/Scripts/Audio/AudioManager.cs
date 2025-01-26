@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     private List<EventInstance> eventInstances;
     private EventInstance musicEventInstance;
     private EventInstance boost;
+    private bool initialized = false;
     private void Awake()
     {
         if (instance != null)
@@ -48,11 +49,15 @@ public class AudioManager : MonoBehaviour
         musicBus.setVolume(musicVolume);    
         SFXBus.setVolume(SFXVolume);
     }
-    private void InitializeMusic(EventReference musicEventReference)
+    public void InitializeMusic(EventReference musicEventReference)
     {
-        musicEventInstance = CreateEventInstance(musicEventReference);
-        musicEventInstance.start();
-        boost = CreateEventInstance(FMODEvents.instance.Boost);
+        if (!initialized)
+        {
+            musicEventInstance = CreateEventInstance(musicEventReference);
+            musicEventInstance.start();
+            boost = CreateEventInstance(FMODEvents.instance.Boost);
+            initialized = true;
+        }
     }
     public void PlayOneShot(EventReference sound, Vector3 position)
     {

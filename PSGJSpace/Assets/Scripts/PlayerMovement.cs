@@ -68,11 +68,10 @@ public class PlayerMovement : MonoBehaviour
                     velocity *= initBoost;
                     lastTimeBoost = Time.time;
                     boostSFX.start();
-                    //partSystemGO.GetComponent<ParticleSystem>().Play();
+                    partSystemGO.GetComponent<ParticleSystem>().Play();
                 }
 
             }
-            partSystemGO.GetComponent<ParticleSystem>().Play();
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (boostAmount > 0)

@@ -21,41 +21,43 @@ public class ShooterEnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (player.transform.position - transform.position).normalized;
+        if (GameManager.Instance.running)
+        {
+            Vector3 direction = (player.transform.position - transform.position).normalized;
 
-        if (Vector3.Distance(transform.position, player.transform.position) > 15)
-        {
-            transform.position += direction * speed * Time.deltaTime;
-        }
-        else if (Vector3.Distance(transform.position, player.transform.position) < 10)
-        {
-            transform.position += -direction * speed * Time.deltaTime;
-        }
-        else
-        {
-
-            if (Time.time - lastMissleFireTime > missleWaitTime)
+            if (Vector3.Distance(transform.position, player.transform.position) > 15)
             {
-                float a = Mathf.Atan2(direction.y, direction.x);
-
-                //Now we set our new rotation. 
-
-                Quaternion q = Quaternion.Euler(0f, 0f, (a * Mathf.Rad2Deg) );
-
-
-                Instantiate(missle, transform.position + (direction * speed * 0.2f), q);
-                lastMissleFireTime = Time.time;
+                transform.position += direction * speed * Time.deltaTime;
             }
+            else if (Vector3.Distance(transform.position, player.transform.position) < 10)
+            {
+                transform.position += -direction * speed * Time.deltaTime;
+            }
+            else
+            {
+
+                if (Time.time - lastMissleFireTime > missleWaitTime)
+                {
+                    float a = Mathf.Atan2(direction.y, direction.x);
+
+                    //Now we set our new rotation. 
+
+                    Quaternion q = Quaternion.Euler(0f, 0f, (a * Mathf.Rad2Deg));
+
+
+                    Instantiate(missle, transform.position + (direction * speed * 0.2f), q);
+                    lastMissleFireTime = Time.time;
+                }
+            }
+
+
+
+            //We use aTan2 since it handles negative numbers and division by zero errors. 
+            float angle = Mathf.Atan2(direction.y, direction.x);
+
+            //Now we set our new rotation. 
+            transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg));
+
         }
-        
-
-
-        //We use aTan2 since it handles negative numbers and division by zero errors. 
-        float angle = Mathf.Atan2(direction.y, direction.x);
-
-        //Now we set our new rotation. 
-        transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg) );
-
-
     }
 }
