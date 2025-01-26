@@ -8,6 +8,17 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance { get; private set; }
 
+    public float masterVolume = 1;
+    [Range(0f, 1f)]
+    public float musicVolume = 1;
+    [Range(0f, 1f)]
+    public float SFXVolume = 1;
+    [Range(0f, 1f)]
+
+    private Bus masterBus;
+    private Bus musicBus;
+    private Bus SFXBus;
+
 
     private List<EventInstance> eventInstances;
     private EventInstance musicEventInstance;
@@ -21,11 +32,21 @@ public class AudioManager : MonoBehaviour
         }
         instance = this;
         eventInstances = new List<EventInstance>();
+        masterBus = RuntimeManager.GetBus("bus:/");
+        musicBus = RuntimeManager.GetBus("bus:/musc");
+        SFXBus = RuntimeManager.GetBus("bus:/SFX");
     }
 
     private void Start()
     {
         InitializeMusic(FMODEvents.instance.music);
+    }
+
+    private void Update()
+    {
+        masterBus.setVolume(masterVolume);
+        musicBus.setVolume(musicVolume);    
+        SFXBus.setVolume(SFXVolume);
     }
     private void InitializeMusic(EventReference musicEventReference)
     {
@@ -47,6 +68,22 @@ public class AudioManager : MonoBehaviour
     private void setGainParameter (string parameterName, float value)
     {
         boost.setParameterByName(parameterName, value);
+    }
+
+    public void SliderChange(string path, float value)
+    {
+        if (path == "")
+        {
+            masterBus.setVolume((float)value);
+        }
+        else if (path == "music")
+        {
+            musicBus.setVolume((float)value);
+        }
+        if (path == "sfx")
+        {
+            SFXBus.setVolume((float)value);
+        }
     }
 
 }

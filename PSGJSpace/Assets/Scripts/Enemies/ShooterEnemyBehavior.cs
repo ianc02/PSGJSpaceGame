@@ -9,6 +9,7 @@ public class ShooterEnemyBehavior : MonoBehaviour
     public GameObject missle;
     public float missleWaitTime;
 
+
     private float lastMissleFireTime;
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class ShooterEnemyBehavior : MonoBehaviour
 
                 //Now we set our new rotation. 
 
-                Quaternion q = Quaternion.Euler(0f, 0f, (a * Mathf.Rad2Deg) + 90);
+                Quaternion q = Quaternion.Euler(0f, 0f, (a * Mathf.Rad2Deg) );
 
 
                 Instantiate(missle, transform.position + (direction * speed * 0.2f), q);
@@ -53,7 +54,7 @@ public class ShooterEnemyBehavior : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x);
 
         //Now we set our new rotation. 
-        transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg) + 90);
+        transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg) );
 
 
     }

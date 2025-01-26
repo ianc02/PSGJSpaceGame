@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public float maxBoost;
     public float regenRate;
     public float initBoost;
+    public float partSystemAngleChange;
+    public GameObject partSystemGO;
 
     private float lastTimeBoost;
     //Sound
@@ -38,6 +40,18 @@ public class PlayerMovement : MonoBehaviour
         
         float rotationInput = Input.GetAxis("Horizontal"); // "A" or "D" keys
         transform.Rotate(Vector3.forward * -rotationInput * rotationSpeed * Time.deltaTime);
+        
+        float totalAngle = 0f;
+        if (Input.GetKey(KeyCode.A))
+        {
+            totalAngle += partSystemAngleChange;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            totalAngle -= partSystemAngleChange;
+        }
+        Quaternion psAngle = Quaternion.Euler(totalAngle,  -90, partSystemGO.transform.rotation.z );
+        partSystemGO.transform.localRotation = psAngle;
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -53,9 +67,11 @@ public class PlayerMovement : MonoBehaviour
                 velocity *= initBoost;
                 lastTimeBoost = Time.time;
                 boostSFX.start();
+                //partSystemGO.GetComponent<ParticleSystem>().Play();
             }
             
         }
+        partSystemGO.GetComponent<ParticleSystem>().Play();
         if (Input.GetKey(KeyCode.LeftShift)) 
         {
             if (boostAmount > 0)
@@ -82,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
                 boostSFXValue -= 0.12f;
+                partSystemGO.GetComponent<ParticleSystem>().Stop();
             }
 
 

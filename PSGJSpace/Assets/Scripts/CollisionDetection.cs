@@ -13,7 +13,7 @@ public class CollisionDetection : MonoBehaviour
 
     private void Start()
     {
-        explosions = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Explsions);
+         explosions = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Explsions);
         pickups = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Pickups);
         hurt = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Hurt);
     }
@@ -42,7 +42,7 @@ public class CollisionDetection : MonoBehaviour
                     GameManager.Instance.addToScore(100);
 
                 }
-                else if (gameObject.layer == 11)
+                else if (gameObject.layer == 11) //shooterenemy
                 {
                     if (GameManager.Instance.boostn)
                     {
@@ -57,7 +57,7 @@ public class CollisionDetection : MonoBehaviour
                     GameManager.Instance.DestroyEnemy(transform.gameObject);
                     GameManager.Instance.addToScore(200);
                 }
-                else if (gameObject.layer == 11)
+                else if (gameObject.layer == 12) //missle
                 {
                     if (GameManager.Instance.boostn)
                     {
@@ -69,9 +69,9 @@ public class CollisionDetection : MonoBehaviour
                     }
                     hurt.start();
                     explosions.start();
-                    GameManager.Instance.DestroyEnemy(transform.gameObject);
+                    Destroy(gameObject);
                 }
-                else if (gameObject.layer == 10)
+                else if (gameObject.layer == 10)// shipbit
                 {
                     other.GetComponent<PlayerMovement>().healthAmount += 6f;
                     pickups.start();

@@ -104,7 +104,8 @@ public class GameManager : MonoBehaviour
     public void DestroyEnemy(GameObject enemy)
     {
         Vector3 pos = enemy.transform.position;
-        Destroy(enemy);
+        enemy.GetComponent<ParticleSystem>().Play();
+        enemy.GetComponent<SpriteRenderer>().enabled = false;
         
         
         for (int i = 0; i < Random.Range(2, 6); i++)
