@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
 
         velocity *= .993f;
-        Debug.Log(velocity);
+        //Debug.Log(velocity);
 
     }
 }
