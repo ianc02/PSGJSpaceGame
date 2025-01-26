@@ -7,15 +7,12 @@ public class MissleBehavior : MonoBehaviour
 {
     private GameObject player;
     public float speed;
-    public float time2Die;
-    private float startTime;
     private bool fired;
     private Vector3 constDirection;
     // Start is called before the first frame update
     void Start()
     {
         player = GameManager.Instance.player;
-        startTime = Time.time;
         fired = false;
     }
 
@@ -42,11 +39,7 @@ public class MissleBehavior : MonoBehaviour
 
 
 
-            // implement better system lik coroutines so cant glitch missles by pausing and waiting out
-            if (Time.time - startTime > time2Die)
-            {
-                Destroy(gameObject);
-            }
+            
         }
 
 

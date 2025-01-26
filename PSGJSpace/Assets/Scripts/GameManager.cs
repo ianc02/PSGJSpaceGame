@@ -36,12 +36,17 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public Camera mainCamera;
     public Camera miniMapCam;
+    public GameObject PlayerDeathPartSys;
+    public bool playerCanMove = false;
 
     public float score;
     public TextMeshProUGUI scoreValue;
 
     public GameObject MainMenu;
     public GameObject InGameOverlay;
+    public GameObject HighScoreGO;
+    public GameObject HighScoreVal;
+    private float highestOfScores = 0;
 
     public GameObject SettingsScreen;
     public GameObject SettingsScreenMainMenuButton;
@@ -52,8 +57,13 @@ public class GameManager : MonoBehaviour
     public GameObject ShipBit;
     public GameObject Shooter;
     private int numEnemies;
+    private List<GameObject> enemies;
 
     public bool running;
+
+    private int maxNumEnemies = 30;
+    private int lowOddShooter = 20;
+    private int difficultyIncrease = 0;
 
 
     
@@ -67,12 +77,14 @@ public class GameManager : MonoBehaviour
         health.GetComponent<Slider>().value = 1;    
         originPlayerPos = player.transform.position;
         running = false;
+        enemies = new List<GameObject>();
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             if (running)
@@ -89,9 +101,10 @@ public class GameManager : MonoBehaviour
         }
         if (running)
         {
+            difficultyIncrease = (int)Mathf.Round(score / 800);
             boost.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().boostAmount / player.GetComponent<PlayerMovement>().maxBoost;
             health.GetComponent<Slider>().value = player.GetComponent<PlayerMovement>().healthAmount / player.GetComponent<PlayerMovement>().maxHealth;
-            if (numEnemies < 30)
+            if (numEnemies < maxNumEnemies + difficultyIncrease)
             {
                 SpawnEnemies();
             }
@@ -123,11 +136,29 @@ public class GameManager : MonoBehaviour
         MainMenu.SetActive(true);
         SettingsScreenXButton.SetActive(true);
         InGameOverlay.SetActive(false);
+        running = false;
 
+    }
+    public void StartTheGame()
+    {
+        AudioManager.instance.InitializeMusic(FMODEvents.instance.music);
+        player.transform.position = originPlayerPos;
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+
+        }
+        player.GetComponent<PlayerMovement>().healthAmount = player.GetComponent<PlayerMovement>().maxHealth;
+        score = 0;
+        numEnemies = 0;
+        UnpauseTheGame();
+        
+       
     }
     public void UnpauseTheGame()
     {
-        AudioManager.instance.InitializeMusic(FMODEvents.instance.music);
+        
+        playerCanMove = true;
         running = true;
         MainMenu.SetActive(false);
         SettingsScreen.SetActive(false);
@@ -141,14 +172,16 @@ public class GameManager : MonoBehaviour
         if (Vector3.Distance(player.transform.position, p) > 20f)
         {
             int r = Random.Range(0, 100);
-            if (r < 20)
+            if (r < lowOddShooter+difficultyIncrease)
             {
-                Instantiate(Shooter, p, q);
+                enemies.Add(Instantiate(Shooter, p, q));
             }
             else
             {
-                Instantiate(BasicEnemy, p, q);
+                enemies.Add(Instantiate(BasicEnemy, p, q));
+                
             }
+            
             numEnemies++;
         }
         
@@ -171,6 +204,31 @@ public class GameManager : MonoBehaviour
     }
     public void addToScore(float value)
     {
-        score += value;
+        if (playerCanMove)
+        {
+            score += value;
+        }
     }
+
+    public void GameIsOver()
+    {
+
+        PlayerDeathPartSys.GetComponent<ParticleSystem>().Play();   
+        playerCanMove = false;
+        StartCoroutine(WFS(5));
+        
+    }
+
+    IEnumerator WFS(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        BackToMainMenu();
+        HighScoreGO.SetActive(true);
+        if (score > highestOfScores)
+        {
+            HighScoreVal.GetComponent<TextMeshProUGUI>().text = Mathf.Round(score).ToString();
+            highestOfScores = score;
+        }
+        StopAllCoroutines();
+    } 
 }
