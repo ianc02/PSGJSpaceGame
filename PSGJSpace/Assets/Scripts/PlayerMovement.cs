@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float initBoost;
     public float partSystemAngleChange;
     public GameObject partSystemGO;
+    public float velocityDrag;
 
     private float lastTimeBoost;
     //Sound
@@ -121,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
             transform.position += velocity * Time.deltaTime;
 
-            velocity *= .993f;
+            velocity *= velocityDrag;
             //Debug.Log(velocity);
         }
 
