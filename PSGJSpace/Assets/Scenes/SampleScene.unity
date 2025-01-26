@@ -523,16 +523,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   rotationSpeed: 150
-  boostAmount: 1000
+  boostAmount: 850
   healthAmount: 300
   boostAddition: 1.005
   maxHealth: 300
-  maxBoost: 1000
+  maxBoost: 850
   regenRate: 0.004
   initBoost: 2.5
   partSystemAngleChange: 20
   partSystemGO: {fileID: 1647529896}
-  velocityDrag: 0.9
+  velocityDrag: 0.972
 --- !u!50 &50272160
 Rigidbody2D:
   serializedVersion: 4
