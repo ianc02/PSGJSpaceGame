@@ -521,13 +521,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e74b854e05f9d41ad09d534ffd343f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 30
   rotationSpeed: 150
-  boostAmount: 5000
+  boostAmount: 2500
   healthAmount: 300
   boostAddition: 1.005
   maxHealth: 300
-  maxBoost: 5000
+  maxBoost: 2500
   regenRate: 0.004
   initBoost: 2.5
   partSystemAngleChange: 20
