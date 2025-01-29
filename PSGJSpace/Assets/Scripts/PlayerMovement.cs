@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private EventInstance boostSFX;
     private float boostSFXValue;
 
-    private Vector3 velocity;
+    private Vector3 velocity ;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
                         boostSFXValue = 1f;
                         boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
+                        velocity = transform.up* Mathf.Max(Vector3.Magnitude(velocity), (speed/2) *Time.deltaTime);
                         velocity *= initBoost;
                         lastTimeBoost = Time.time;
                         boostSFX.start();
