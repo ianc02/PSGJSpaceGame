@@ -2337,7 +2337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 50272155}
 --- !u!1 &678825292
 GameObject:
   m_ObjectHideFlags: 0

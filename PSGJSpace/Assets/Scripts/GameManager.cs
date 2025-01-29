@@ -89,13 +89,23 @@ public class GameManager : MonoBehaviour
         {
             if (running)
             {
-                running = false;
-                PauseTheGame();
+                
+                
+                    running = false;
+                    PauseTheGame();
+                
             }
             else
             {
-                running = true;
-                UnpauseTheGame();
+                if (MainMenu.active)
+                {
+                    StartTheGame();
+                }
+                else
+                {
+                    running = true;
+                    UnpauseTheGame();
+                }
             }
 
         }
