@@ -338,7 +338,7 @@ public class GameManager : MonoBehaviour
         }
         else if (section <=12)
         {
-            DialogueText.GetComponent<TextMeshProUGUI>().text = "Connect Thrusters and Shield then direct all available power to that system. NOT the seat warmer. I'm going out comfortable.";
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Connect Thrusters and Shield then direct all available power to that system. NOT from the seat warmer. I'm going out comfortable.";
             StartCoroutine(WaitForInput(section));
         }
         else if (section <=14)
