@@ -38,6 +38,15 @@ public class GameManager : MonoBehaviour
     public Color boostTimerColorBad;
     public float boostStartTime;
 
+    public GameObject DuringGameOverlay;
+    public GameObject StoryIntro;
+    public GameObject speakerName;
+    public GameObject DialogueText;
+    public GameObject speakerSprite;
+    public Sprite CapnSprite;
+    public Sprite ShipSprite;
+    private bool watchedIntro = false;
+
     public GameObject player;
     public Camera mainCamera;
     public Camera miniMapCam;
@@ -157,17 +166,29 @@ public class GameManager : MonoBehaviour
     }
     public void StartTheGame()
     {
-        AudioManager.instance.InitializeMusic(FMODEvents.instance.music);
-        player.transform.position = originPlayerPos;
-        foreach (GameObject enemy in enemies)
+        MainMenu.SetActive(false);
+        SettingsScreen.SetActive(false);
+        InGameOverlay.SetActive(true);
+        if (!watchedIntro)
         {
-            Destroy(enemy);
 
+            Dialogue(0);
         }
-        player.GetComponent<PlayerMovement>().healthAmount = player.GetComponent<PlayerMovement>().maxHealth;
-        score = 0;
-        numEnemies = 0;
-        UnpauseTheGame();
+        else
+        {
+            Debug.Log("w");
+            AudioManager.instance.InitializeMusic(FMODEvents.instance.music);
+            player.transform.position = originPlayerPos;
+            foreach (GameObject enemy in enemies)
+            {
+                Destroy(enemy);
+
+            }
+            player.GetComponent<PlayerMovement>().healthAmount = player.GetComponent<PlayerMovement>().maxHealth;
+            score = 0;
+            numEnemies = 0;
+            UnpauseTheGame();
+        }
         
        
     }
@@ -246,7 +267,12 @@ public class GameManager : MonoBehaviour
             highestOfScores = score;
         }
         StopAllCoroutines();
-    } 
+    }
+    IEnumerator ActualWFS(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        
+    }
 
     public void updateBoostTimer()
     {
@@ -262,5 +288,77 @@ public class GameManager : MonoBehaviour
             boostTimerAmount.GetComponent<Image>().color = Color.Lerp(boostTimerColorBad, boostTimerColorGood, Mathf.Max(0,(2-amt)));
         }
         
+    }
+
+    public void Dialogue(int section)
+       
+    {
+        Debug.Log(section);
+        if (section == 0)
+        {
+            
+            speakerSprite.GetComponent<Image>().sprite = CapnSprite;
+            speakerName.GetComponent<TextMeshProUGUI>().text = "Captain";
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "$%*&!. That REALLY HURT!";
+            StartCoroutine(WaitForInput(section));
+        }
+        else if (section <=2)
+        {
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Ship. How we doin'?";
+            StartCoroutine(WaitForInput(section));
+        }
+        else if (section <=4)
+        {
+            speakerSprite.GetComponent<Image>().sprite = ShipSprite;
+            speakerName.GetComponent<TextMeshProUGUI>().text = "Ship";
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Friendly Fleet Destroyed. Life Support: Offline. Energy Weapons: Offline. Ballistics: Offline.  Communication: Offline. Cryo-Chamber: Offl...";
+            StartCoroutine(WaitForInput(section));
+        }
+        else if (section <=6)
+        {
+            speakerSprite.GetComponent<Image>().sprite = CapnSprite;
+            speakerName.GetComponent<TextMeshProUGUI>().text = "Captain";
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Okay yeah I get it. What's working?";
+            StartCoroutine(WaitForInput(section));
+        }
+        else if (section <=8)
+        {
+            speakerSprite.GetComponent<Image>().sprite = ShipSprite;
+            speakerName.GetComponent<TextMeshProUGUI>().text = "Ship";
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Forward and pivot engines: Online. Navigation: Damaged. Hull: Damaged. Shield: Low Power. Boosters: Low Power. Seat Warmer: Online";
+            StartCoroutine(WaitForInput(section));
+        }
+
+        else if (section <=10)
+        {
+            speakerSprite.GetComponent<Image>().sprite = CapnSprite;
+            speakerName.GetComponent<TextMeshProUGUI>().text = "Captain";
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Give 40 of my best years and this is the thanks I get. Whatever. I can make this work... for a bit.";
+            StartCoroutine(WaitForInput(section));
+        }
+        else if (section <=12)
+        {
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Connect Thrusters and Shield then direct all available power to that system. NOT the seat warmer. I'm going out comfortable.";
+            StartCoroutine(WaitForInput(section));
+        }
+        else if (section <=14)
+        {
+            DialogueText.GetComponent<TextMeshProUGUI>().text = "Get ready to scavange debris, we're going to need it.";
+            StartCoroutine(WaitForInput(section));
+        }
+        else
+        {
+            DuringGameOverlay.SetActive(true);
+            StoryIntro.SetActive(false);
+            watchedIntro = true;
+            StartTheGame();
+        }
+    }
+    
+    IEnumerator WaitForInput(int prevSection)
+    {
+        yield return new WaitUntil(() => Input.anyKeyDown);
+        Dialogue(prevSection + 1);
+
     }
 }

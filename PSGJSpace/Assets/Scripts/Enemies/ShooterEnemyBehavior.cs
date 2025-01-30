@@ -42,7 +42,7 @@ public class ShooterEnemyBehavior : MonoBehaviour
 
                     //Now we set our new rotation. 
 
-                    Quaternion q = Quaternion.Euler(0f, 0f, (a * Mathf.Rad2Deg));
+                    Quaternion q = Quaternion.Euler(0f, 0f, (a * Mathf.Rad2Deg)-90);
 
 
                     Instantiate(missle, transform.position + (direction * speed * 0.2f), q);
@@ -56,7 +56,7 @@ public class ShooterEnemyBehavior : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x);
 
             //Now we set our new rotation. 
-            transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg));
+            transform.rotation = Quaternion.Euler(0f, 0f, (angle * Mathf.Rad2Deg)-90);
 
         }
     }
