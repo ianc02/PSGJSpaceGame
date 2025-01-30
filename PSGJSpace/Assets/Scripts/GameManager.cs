@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
     public GameObject boost;
     public bool boostn;
     public GameObject health;
+    public GameObject boostTimer;
+    public GameObject boostTimerAmount;
+    public Color boostTimerColorGood;
+    public Color boostTimerColorBad;
+    public float boostStartTime;
 
     public GameObject player;
     public Camera mainCamera;
@@ -128,6 +133,7 @@ public class GameManager : MonoBehaviour
             }
             boostn = Input.GetKey(KeyCode.LeftShift);
             scoreValue.text = Mathf.Round(score).ToString();
+            updateBoostTimer();
         }
     }
 
@@ -241,4 +247,20 @@ public class GameManager : MonoBehaviour
         }
         StopAllCoroutines();
     } 
+
+    public void updateBoostTimer()
+    {
+        float amt = (Time.time - boostStartTime) / 0.75f;
+        float minAmt = Mathf.Min(1, amt);
+        boostTimer.GetComponent<Slider>().value = minAmt;
+        if (amt <= 1)
+        {
+            boostTimerAmount.GetComponent<Image>().color = Color.Lerp(boostTimerColorBad, boostTimerColorGood, Mathf.Min(1, (Time.time - boostStartTime) / 0.75f));
+        }
+        else
+        {
+            boostTimerAmount.GetComponent<Image>().color = Color.Lerp(boostTimerColorBad, boostTimerColorGood, Mathf.Max(0,(2-amt)));
+        }
+        
+    }
 }

@@ -66,12 +66,13 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (Time.time - lastTimeBoost > 0.75)
                     {
-
+                        //ADD UI BOOST INDICATOR
                         boostSFXValue = 1f;
                         boostSFX.setParameterByName("Boost_Fade", boostSFXValue);
                         velocity = transform.up* Mathf.Max(Vector3.Magnitude(velocity), (speed/2) *Time.deltaTime);
                         velocity *= initBoost;
                         lastTimeBoost = Time.time;
+                        GameManager.Instance.boostStartTime = lastTimeBoost;
                         boostSFX.start();
                         partSystemGO.GetComponent<ParticleSystem>().Play();
 
