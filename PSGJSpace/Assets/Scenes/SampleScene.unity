@@ -11992,13 +11992,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Credits\n\nYou! \nThank you for playing :)\nPirate Software for hosting
-    this great Game Jam\nJonathon for being a lovely and responsive tester\nMe! \nMaking
-    Games is hard, I'm proud of this and you should be proud of the work you've done
-    as well!\nThe following (should be) hyperlinks to resources:\n* <link=https://opengameart.org/content/space-background-1>Space
-    Background</link>\n* </link=https://www.dafont.com/spaceport-2006.font?l[]=10>Font</link>\n*
-    <link=https://www.youtube.com/watch?v=rcBHIOjZDpk&t=1592s>FMOD Tutorial</link>\n*
-    <link=https://signal.vercel.app/edit>Music Creation Site</link>\n* <link=https://raylibtech.itch.io/rfxgen>SFX
-    generator</link>\n"
+    this great Game Jam\nJonathon for being a lovely and responsive tester\nMadison
+    for being so supportive \nMe! \nMaking Games is hard, I'm proud of this and you
+    should be proud of the work you've done as well\nFMOD Studio by Firelight Technologies
+    Pty Ltd.\nA full list of attributions and links to resources can be found in
+    the game design doc attached in the itch.io page for this game. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8d7379ae72e5664cabe4031debc3fb5, type: 2}
   m_sharedMaterial: {fileID: -7879527290602775559, guid: d8d7379ae72e5664cabe4031debc3fb5, type: 2}
