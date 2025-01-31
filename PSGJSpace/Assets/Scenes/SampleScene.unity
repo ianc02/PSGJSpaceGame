@@ -219,6 +219,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &14606349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1456,6 +1468,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2906,6 +2930,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &678825295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3641,6 +3677,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &812851010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3765,6 +3813,20 @@ MonoBehaviour:
       Data3: 15977859
       Data4: -671322554
     Path: event:/Select
+  <ShipBeep>k__BackingField:
+    Guid:
+      Data1: 861808414
+      Data2: 1154836641
+      Data3: 822750390
+      Data4: -1907852410
+    Path: event:/ShipBeep
+  <CapnTalk>k__BackingField:
+    Guid:
+      Data1: 1229662786
+      Data2: 1119700244
+      Data3: 487265935
+      Data4: -669506432
+    Path: event:/CaptainTalk
 --- !u!1 &835753151
 GameObject:
   m_ObjectHideFlags: 0
@@ -4042,6 +4104,18 @@ MonoBehaviour:
       - m_Target: {fileID: 286310428}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartTheGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4828,6 +4902,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1049288505
 GameObject:
   m_ObjectHideFlags: 0
@@ -5171,6 +5257,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1276202593}
         m_TargetAssemblyTypeName: SliderChange, Assembly-CSharp
         m_MethodName: SliderValChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5917,6 +6015,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1441751060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6416,6 +6526,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11870,12 +11992,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Credits\n\nYou! \nThank you for playing :)\nPirate Software for hosting
-    this great Game Jam\nMe! \nMaking Games is hard, I'm proud of this and you should
-    be proud of the work you've done as well!\nThe following are hyperlinks to resources:\n*
-    <link=https://opengameart.org/content/space-background-1>Space Background</link>\n*
-    </link=https://www.dafont.com/spaceport-2006.font?l[]=10>Font</link>\n* <link=https://www.youtube.com/watch?v=rcBHIOjZDpk&t=1592s>FMOD
-    Tutorial</link>\n* <link=https://signal.vercel.app/edit>Music Creation Site</link>\n*
-    <link=https://raylibtech.itch.io/rfxgen>SFX generator</link>\n"
+    this great Game Jam\nJonathon for being a lovely and responsive tester\nMe! \nMaking
+    Games is hard, I'm proud of this and you should be proud of the work you've done
+    as well!\nThe following (should be) hyperlinks to resources:\n* <link=https://opengameart.org/content/space-background-1>Space
+    Background</link>\n* </link=https://www.dafont.com/spaceport-2006.font?l[]=10>Font</link>\n*
+    <link=https://www.youtube.com/watch?v=rcBHIOjZDpk&t=1592s>FMOD Tutorial</link>\n*
+    <link=https://signal.vercel.app/edit>Music Creation Site</link>\n* <link=https://raylibtech.itch.io/rfxgen>SFX
+    generator</link>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8d7379ae72e5664cabe4031debc3fb5, type: 2}
   m_sharedMaterial: {fileID: -7879527290602775559, guid: d8d7379ae72e5664cabe4031debc3fb5, type: 2}
@@ -17996,6 +18119,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2047184733}
         m_TargetAssemblyTypeName: SliderChange, Assembly-CSharp
         m_MethodName: SliderValChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 286310428}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playClickSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

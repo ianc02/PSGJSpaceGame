@@ -80,6 +80,12 @@ public class GameManager : MonoBehaviour
     private int difficultyIncrease = 0;
 
 
+    //SOUND
+    private EventInstance selectClick;
+    private EventInstance shipSound;
+    private EventInstance captainSound;
+
+
     
 
     private Vector3 originPlayerPos;
@@ -92,6 +98,9 @@ public class GameManager : MonoBehaviour
         originPlayerPos = player.transform.position;
         running = false;
         enemies = new List<GameObject>();
+        selectClick = AudioManager.instance.CreateEventInstance(FMODEvents.instance.Selection);
+        shipSound = AudioManager.instance.CreateEventInstance(FMODEvents.instance.ShipBeep);
+        captainSound = AudioManager.instance.CreateEventInstance(FMODEvents.instance.CapnTalk);
         
     }
 
@@ -300,15 +309,18 @@ public class GameManager : MonoBehaviour
             speakerSprite.GetComponent<Image>().sprite = CapnSprite;
             speakerName.GetComponent<TextMeshProUGUI>().text = "Captain";
             DialogueText.GetComponent<TextMeshProUGUI>().text = "$%*&!. That REALLY HURT!";
+            captainSound.start();
             StartCoroutine(WaitForInput(section));
         }
         else if (section <=2)
         {
             DialogueText.GetComponent<TextMeshProUGUI>().text = "Ship. How we doin'?";
+            captainSound.start();
             StartCoroutine(WaitForInput(section));
         }
         else if (section <=4)
         {
+            shipSound.start();
             speakerSprite.GetComponent<Image>().sprite = ShipSprite;
             speakerName.GetComponent<TextMeshProUGUI>().text = "Ship";
             DialogueText.GetComponent<TextMeshProUGUI>().text = "Friendly Fleet Destroyed. Life Support: Offline. Energy Weapons: Offline. Ballistics: Offline.  Communication: Offline. Cryo-Chamber: Offl...";
@@ -319,10 +331,12 @@ public class GameManager : MonoBehaviour
             speakerSprite.GetComponent<Image>().sprite = CapnSprite;
             speakerName.GetComponent<TextMeshProUGUI>().text = "Captain";
             DialogueText.GetComponent<TextMeshProUGUI>().text = "Okay yeah I get it. What's working?";
+            captainSound.start();
             StartCoroutine(WaitForInput(section));
         }
         else if (section <=8)
         {
+            shipSound.start();
             speakerSprite.GetComponent<Image>().sprite = ShipSprite;
             speakerName.GetComponent<TextMeshProUGUI>().text = "Ship";
             DialogueText.GetComponent<TextMeshProUGUI>().text = "Forward and pivot engines: Online. Navigation: Damaged. Hull: Damaged. Shield: Low Power. Boosters: Low Power. Seat Warmer: Online";
@@ -333,16 +347,19 @@ public class GameManager : MonoBehaviour
         {
             speakerSprite.GetComponent<Image>().sprite = CapnSprite;
             speakerName.GetComponent<TextMeshProUGUI>().text = "Captain";
+            captainSound.start();
             DialogueText.GetComponent<TextMeshProUGUI>().text = "Give 40 of my best years and this is the thanks I get. Whatever. I can make this work... for a bit.";
             StartCoroutine(WaitForInput(section));
         }
         else if (section <=12)
         {
+            captainSound.start();
             DialogueText.GetComponent<TextMeshProUGUI>().text = "Connect Thrusters and Shield then direct all available power to that system. NOT from the seat warmer. I'm going out comfortable.";
             StartCoroutine(WaitForInput(section));
         }
         else if (section <=14)
         {
+            captainSound.start();
             DialogueText.GetComponent<TextMeshProUGUI>().text = "Get ready to scavange debris, we're going to need it.";
             StartCoroutine(WaitForInput(section));
         }
@@ -360,5 +377,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Input.anyKeyDown);
         Dialogue(prevSection + 1);
 
+    }
+
+    public void playClickSelect()
+    {
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+
+            selectClick.start();
+        }
     }
 }

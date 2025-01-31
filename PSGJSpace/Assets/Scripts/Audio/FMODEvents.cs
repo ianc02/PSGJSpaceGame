@@ -18,6 +18,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Hurt { get; private set; }
     [field: Header("Selection")]
     [field: SerializeField] public EventReference Selection { get; private set; }
+    [field: Header("ShipBeep")]
+    [field: SerializeField] public EventReference ShipBeep { get; private set; }
+    [field: Header("CapnTalk")]
+    [field: SerializeField] public EventReference CapnTalk { get; private set; }
 
 
     public static FMODEvents instance {get; private set;}
